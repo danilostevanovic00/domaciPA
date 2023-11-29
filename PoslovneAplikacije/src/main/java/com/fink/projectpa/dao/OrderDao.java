@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,6 +49,26 @@ public class OrderDao {
             ResourcesManager.closeResources(rs, ps);
         }
         return order;
+    }
+    
+    public List<Order> find(Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Order> orderList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement("SELECT * FROM order");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Customer customer = CustomerDao.getInstance().find(rs.getInt("customer_id"), con);
+                Employee employee = EmployeeDao.getInstance().find(rs.getInt("employee_id"), con);
+                Shipper shipper = ShipperDao.getInstance().find(rs.getInt("shipper_id"), con);
+                Order order = new Order(rs.getInt("order_id"),rs.getDate("name"), customer, employee, shipper );
+                orderList.add(order);
+            }
+        } finally {
+            ResourcesManager.closeResources(rs, ps);
+        }
+        return orderList;
     }
 
     public int insert(Order order, Connection con) throws SQLException {
@@ -114,7 +136,7 @@ public class OrderDao {
         }
     }
 
-    public void delete(Order order, Connection con) throws SQLException {
+    public void delete(int order_id, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
 
@@ -123,7 +145,7 @@ public class OrderDao {
 
             //delete customer
             ps = con.prepareStatement("DELETE FROM order WHERE order_id=?");
-            ps.setInt(1, order.getOrder_id());
+            ps.setInt(1, order_id);
             ps.executeUpdate();
 
         } finally {

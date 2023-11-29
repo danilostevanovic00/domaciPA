@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -43,6 +45,24 @@ public class ProductDao {
             ResourcesManager.closeResources(rs, ps);
         }
         return product;
+    }
+    
+    public List<Product> find(Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Product> productList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement("SELECT * FROM product");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Supplier supplier = SupplierDao.getInstance().find(rs.getInt("supplier_id"), con);
+                Product product = new Product(rs.getInt("customer_id"),rs.getString("name"), rs.getString("product_category"), rs.getInt("price_per_unit"),supplier );
+                productList.add(product);
+            }
+        } finally {
+            ResourcesManager.closeResources(rs, ps);
+        }
+        return productList;
     }
 
     public int insert(Product product, Connection con) throws SQLException {
@@ -93,23 +113,16 @@ public class ProductDao {
         }
     }
 
-    public void delete(Product product, Connection con) throws SQLException {
+    public void delete(int product_id, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
 
-            //delete purchases
-            //OrderDetailDao.getInstance().delete(product, con);
+            OrderDetailDao.getInstance().deleteByProduct(product_id, con);
 
             //delete customer
             ps = con.prepareStatement("DELETE FROM product WHERE product_id=?");
-            ps.setInt(1, product.getProduct_id());
+            ps.setInt(1, product_id);
             ps.executeUpdate();
-
-            //delete address
-            if (product.getSupplier() != null) {
-                SupplierDao.getInstance().delete(product.getSupplier().getSupplier_id(), con);
-            }
-
 
         } finally {
             ResourcesManager.closeResources(null, ps);

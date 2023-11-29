@@ -37,7 +37,7 @@ public class ResourcesManager {
         }
     }
 
-    public static void closeConnection(ResultSet con, PreparedStatement ps) throws WarehouseException {
+    public static void closeConnection(Connection con) throws WarehouseException {
         if (con != null) {
             try {
                 con.close();

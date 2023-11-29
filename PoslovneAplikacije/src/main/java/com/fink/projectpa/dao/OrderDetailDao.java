@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -45,6 +47,47 @@ public class OrderDetailDao {
         }
         return order_detail;
     }
+    
+    public List<OrderDetail> find(Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<OrderDetail> orderDetailList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement("SELECT * FROM order");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = ProductDao.getInstance().find(rs.getInt("product_id"), con);
+                Order order = OrderDao.getInstance().find(rs.getInt("order_id"), con);
+                OrderDetail order_detail = new OrderDetail(rs.getInt("order_detail_id"), order, product,rs.getInt("quantity"));
+                orderDetailList.add(order_detail);
+            }
+        } finally {
+            ResourcesManager.closeResources(rs, ps);
+        }
+        return orderDetailList;
+    }
+    
+    public void update(OrderDetail order_detail, Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        try {
+
+            ps = con.prepareStatement("UPDATE order_detail SET quantity=? WHERE order_detail_id=?");
+            ps.setInt(1, order_detail.getQuantity());
+            ps.setInt(2, order_detail.getOrder_detail_id());
+            ps.executeUpdate();
+
+            if (order_detail.getOrder() != null) {
+                OrderDao.getInstance().update(order_detail.getOrder(), con);
+            }
+            
+            if (order_detail.getProduct() != null) {
+                ProductDao.getInstance().update(order_detail.getProduct(), con);
+            }
+
+        } finally {
+            ResourcesManager.closeResources(null, ps);
+        }
+    }
 
     public void insert(OrderDetail order_detail, Connection con) throws SQLException {
         PreparedStatement ps = null;
@@ -73,22 +116,33 @@ public class OrderDetailDao {
         }
     }
 
-    public void delete(Order order, Connection con) throws SQLException {
+    public void deleteByOrder(int order_id, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement("DELETE FROM order_detail WHERE order_id=?");
-            ps.setInt(1, order.getOrder_id());
+            ps.setInt(1, order_id);
             ps.executeUpdate();
         } finally {
             ResourcesManager.closeResources(null, ps);
         }
     }
 
-    public void delete(Product product, Connection con) throws SQLException {
+    public void deleteByProduct(int product_id, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement("DELETE FROM order_detail WHERE product_id=?");
-            ps.setInt(1, product.getProduct_id());
+            ps.setInt(1, product_id);
+            ps.executeUpdate();
+        } finally {
+            ResourcesManager.closeResources(null, ps);
+        }
+    }
+    
+    public void delete(int order_detail_id, Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement("DELETE FROM order_detail WHERE order_detail_id=?");
+            ps.setInt(1, order_detail_id);
             ps.executeUpdate();
         } finally {
             ResourcesManager.closeResources(null, ps);
