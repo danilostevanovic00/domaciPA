@@ -15,6 +15,9 @@ public class OrderDetail implements Serializable{
     private Order order;
     private Product product;
     private int quantity;
+    
+    public OrderDetail(){
+    }
 
     public OrderDetail(int order_detail_id, Order order, Product product, int quantity) {
         this.order_detail_id = order_detail_id;

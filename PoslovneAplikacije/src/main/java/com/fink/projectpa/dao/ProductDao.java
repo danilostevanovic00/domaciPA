@@ -56,7 +56,7 @@ public class ProductDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Supplier supplier = SupplierDao.getInstance().find(rs.getInt("supplier_id"), con);
-                Product product = new Product(rs.getInt("customer_id"),rs.getString("name"), rs.getString("product_category"), rs.getInt("price_per_unit"),supplier );
+                Product product = new Product(rs.getInt("product_id"),rs.getString("name"), rs.getString("product_category"), rs.getInt("price_per_unit"),supplier );
                 productList.add(product);
             }
         } finally {
@@ -73,11 +73,14 @@ public class ProductDao {
 
             Integer supplier_id = null;
             if (product.getSupplier() != null) {
-                //insert address and receive the value of id
-                supplier_id = SupplierDao.getInstance().insert(product.getSupplier(), con);
+                if (SupplierDao.getInstance().find(product.getSupplier().getSupplier_id(),con)==null){
+                    supplier_id = SupplierDao.getInstance().insert(product.getSupplier(), con);
+                }else{
+                    supplier_id=product.getSupplier().getSupplier_id();
+                }
             }
 
-            ps = con.prepareStatement("INSERT INTO product(name, product_category, price_per_unit, suplier_id) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO product(name, product_category, price_per_unit, supplier_id) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, product.getName());
             ps.setString(2, product.getProduct_category());
             ps.setInt(3, product.getPrice_per_unit());

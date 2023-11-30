@@ -36,14 +36,14 @@ public class OrderDao {
         ResultSet rs = null;
         Order order = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM order WHERE order_id=?");
+            ps = con.prepareStatement("SELECT * FROM `order` where order_id=?");
             ps.setInt(1, order_id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 Customer customer = CustomerDao.getInstance().find(rs.getInt("customer_id"), con);
                 Employee employee = EmployeeDao.getInstance().find(rs.getInt("employee_id"), con);
                 Shipper shipper = ShipperDao.getInstance().find(rs.getInt("shipper_id"), con);
-                order = new Order(order_id,rs.getDate("name"), customer, employee, shipper );
+                order = new Order(order_id,rs.getDate("order_date"), customer, employee, shipper );
             }
         } finally {
             ResourcesManager.closeResources(rs, ps);
@@ -56,13 +56,13 @@ public class OrderDao {
         ResultSet rs = null;
         List<Order> orderList = new ArrayList<>();
         try {
-            ps = con.prepareStatement("SELECT * FROM order");
+            ps = con.prepareStatement("SELECT * FROM `order`");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Customer customer = CustomerDao.getInstance().find(rs.getInt("customer_id"), con);
                 Employee employee = EmployeeDao.getInstance().find(rs.getInt("employee_id"), con);
                 Shipper shipper = ShipperDao.getInstance().find(rs.getInt("shipper_id"), con);
-                Order order = new Order(rs.getInt("order_id"),rs.getDate("name"), customer, employee, shipper );
+                Order order = new Order(rs.getInt("order_id"),rs.getDate("order_date"), customer, employee, shipper );
                 orderList.add(order);
             }
         } finally {
@@ -79,23 +79,32 @@ public class OrderDao {
 
             Integer customer_id = null;
             if (order.getCustomer() != null) {
-                //insert address and receive the value of id
-                customer_id = CustomerDao.getInstance().insert(order.getCustomer(), con);
+                if (CustomerDao.getInstance().find(order.getCustomer().getCustomer_id(),con)==null){
+                    customer_id = CustomerDao.getInstance().insert(order.getCustomer(), con);
+                }else{
+                    customer_id=order.getCustomer().getCustomer_id();
+                }
             }
             
             Integer employee_id = null;
             if (order.getEmployee() != null) {
-                //insert address and receive the value of id
-                employee_id = EmployeeDao.getInstance().insert(order.getEmployee(), con);
+                if (EmployeeDao.getInstance().find(order.getEmployee().getEmployee_id(),con)==null){
+                    employee_id = EmployeeDao.getInstance().insert(order.getEmployee(), con);
+                }else{
+                    employee_id=order.getEmployee().getEmployee_id();
+                }
             }
             
             Integer shipper_id = null;
             if (order.getShipper() != null) {
-                //insert address and receive the value of id
-                shipper_id = ShipperDao.getInstance().insert(order.getShipper(), con);
+                if (ShipperDao.getInstance().find(order.getShipper().getShipper_id(),con)==null){
+                    shipper_id = ShipperDao.getInstance().insert(order.getShipper(), con);
+                }else{
+                    shipper_id=order.getShipper().getShipper_id();
+                }
             }
 
-            ps = con.prepareStatement("INSERT INTO product(order_date, customer_id, employee_id, shipper_id) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO `order`(order_date, customer_id, employee_id, shipper_id) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, order.getOrder_date());
             ps.setInt(2, customer_id);
             ps.setInt(3, employee_id);
@@ -114,7 +123,7 @@ public class OrderDao {
         PreparedStatement ps = null;
         try {
 
-            ps = con.prepareStatement("UPDATE order SET order_date=? WHERE order_id=?");
+            ps = con.prepareStatement("UPDATE `order` SET order_date=? WHERE order_id=?");
             ps.setDate(1, order.getOrder_date());
             ps.setInt(2, order.getOrder_id());
             ps.executeUpdate();
@@ -144,7 +153,7 @@ public class OrderDao {
             //OrderDetailDao.getInstance().delete(order, con);
 
             //delete customer
-            ps = con.prepareStatement("DELETE FROM order WHERE order_id=?");
+            ps = con.prepareStatement("DELETE FROM `order` WHERE order_id=?");
             ps.setInt(1, order_id);
             ps.executeUpdate();
 

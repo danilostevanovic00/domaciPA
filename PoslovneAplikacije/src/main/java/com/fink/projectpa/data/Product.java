@@ -16,6 +16,8 @@ public class Product implements Serializable{
     private String product_category;
     private int price_per_unit;
     private Supplier supplier;
+    
+    public Product(){}
 
     public Product(int product_id, String name, String product_category, int price_per_unit, Supplier supplier) {
         this.product_id = product_id;

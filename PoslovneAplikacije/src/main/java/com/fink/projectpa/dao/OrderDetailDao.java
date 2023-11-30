@@ -53,7 +53,7 @@ public class OrderDetailDao {
         ResultSet rs = null;
         List<OrderDetail> orderDetailList = new ArrayList<>();
         try {
-            ps = con.prepareStatement("SELECT * FROM order");
+            ps = con.prepareStatement("SELECT * FROM order_detail");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = ProductDao.getInstance().find(rs.getInt("product_id"), con);
@@ -96,14 +96,20 @@ public class OrderDetailDao {
             
             Integer order_id = null;
             if (order_detail.getOrder() != null) {
-                //insert address and receive the value of id
-                order_id = OrderDao.getInstance().insert(order_detail.getOrder(), con);
+                if (OrderDao.getInstance().find(order_detail.getOrder().getOrder_id(),con)==null){
+                    order_id = OrderDao.getInstance().insert(order_detail.getOrder(), con);
+                }else{
+                    order_id=order_detail.getOrder().getOrder_id();
+                }
             }
             
             Integer product_id = null;
             if (order_detail.getProduct() != null) {
-                //insert address and receive the value of id
-                product_id = ProductDao.getInstance().insert(order_detail.getProduct(), con);
+                if (ProductDao.getInstance().find(order_detail.getProduct().getProduct_id(),con)==null){
+                    product_id = ProductDao.getInstance().insert(order_detail.getProduct(), con);
+                }else{
+                    product_id=order_detail.getProduct().getProduct_id();
+                }
             }
             
             ps = con.prepareStatement("INSERT INTO order_detail(order_id, product_id, quantity) VALUES(?,?,?)");

@@ -64,7 +64,7 @@ public class SupplierDao {
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO suplier(name,contact_person,address,city,country,phone) VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO supplier(name,contact_person,address,city,country,phone) VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, supplier.getName());
             ps.setString(2, supplier.getContact_person());
             ps.setString(3, supplier.getAddress());
@@ -91,6 +91,7 @@ public class SupplierDao {
             ps.setString(4, supplier.getCity());
             ps.setString(5, supplier.getCountry());
             ps.setString(6, supplier.getPhone());
+            ps.setInt(7, supplier.getSupplier_id());
             ps.executeUpdate();
         } finally {
             ResourcesManager.closeResources(null, ps);

@@ -14,6 +14,9 @@ public class Shipper implements Serializable{
     private int shipper_id = -1;
     private String name;
     private String phone;
+    
+    public Shipper(){
+    }
 
     public Shipper(String name, String phone) {
         this.name = name;

@@ -64,7 +64,7 @@ public class ShipperDao {
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO suplier(name,phone) VALUES(?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO shipper(name,phone) VALUES(?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, shipper.getName());
             ps.setString(2, shipper.getPhone());
             ps.executeUpdate();

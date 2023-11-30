@@ -26,7 +26,7 @@ public class SupplierService {
         return instance;
     }
     
-    public void addNewSupplier(Supplier supplier) throws WarehouseException, SQLException {
+    public void addNewSupplier(Supplier supplier) throws WarehouseException {
         Connection con = null;
         try {
             con = ResourcesManager.getConnection();

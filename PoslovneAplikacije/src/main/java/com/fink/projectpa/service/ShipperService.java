@@ -26,7 +26,7 @@ public class ShipperService {
         return instance;
     }
     
-    public void addNewShipper(Shipper shipper) throws WarehouseException, SQLException {
+    public void addNewShipper(Shipper shipper) throws WarehouseException{
         Connection con = null;
         try {
             con = ResourcesManager.getConnection();
@@ -78,8 +78,8 @@ public class ShipperService {
             con = ResourcesManager.getConnection();
             con.setAutoCommit(false);
 
-            Shipper supplier = ShipperDao.getInstance().find(shipper_id, con);
-            if (supplier != null) {
+            Shipper shipper = ShipperDao.getInstance().find(shipper_id, con);
+            if (shipper != null) {
                 ShipperDao.getInstance().delete(shipper_id, con);
             }
 

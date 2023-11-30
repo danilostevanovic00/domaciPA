@@ -18,6 +18,9 @@ public class Supplier implements Serializable{
     private String city;
     private String country;
     private String phone;
+    
+    public Supplier(){
+    }
 
     public Supplier(int supplier_id, String name, String contact_person, String address, String city, String country, String phone) {
         this.supplier_id = supplier_id;

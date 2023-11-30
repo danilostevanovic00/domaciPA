@@ -78,8 +78,8 @@ public class OrderService {
             con = ResourcesManager.getConnection();
             con.setAutoCommit(false);
 
-            Order customer = OrderDao.getInstance().find(order_id, con);
-            if (customer != null) {
+            Order order = OrderDao.getInstance().find(order_id, con);
+            if (order != null) {
                 OrderDao.getInstance().delete(order_id, con);
             }
             con.commit();
@@ -91,18 +91,18 @@ public class OrderService {
         }
     }
     
-    public void updateOrder(Order product) throws WarehouseException {
+    public void updateOrder(Order order) throws WarehouseException {
         Connection con = null;
         try {
             con = ResourcesManager.getConnection();
             con.setAutoCommit(false);
 
-            OrderDao.getInstance().update(product, con);
+            OrderDao.getInstance().update(order, con);
 
             con.commit();
         } catch (SQLException ex) {
             ResourcesManager.rollbackTransactions(con);
-            throw new WarehouseException("Failed to update product " + product, ex);
+            throw new WarehouseException("Failed to update order " + order, ex);
         } finally {
             ResourcesManager.closeConnection(con);
         }

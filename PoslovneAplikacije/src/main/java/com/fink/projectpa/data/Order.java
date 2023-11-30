@@ -16,6 +16,9 @@ public class Order implements Serializable{
     private Customer customer;
     private Employee employee;
     private Shipper shipper;
+    
+    public Order(){
+    }
 
     public Order(int order_id, Date order_date, Customer customer, Employee employee, Shipper shipper) {
         this.order_id = order_id;

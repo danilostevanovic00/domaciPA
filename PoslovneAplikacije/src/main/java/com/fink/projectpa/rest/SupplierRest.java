@@ -4,9 +4,9 @@
  */
 package com.fink.projectpa.rest;
 
-import com.fink.projectpa.data.Customer;
+import com.fink.projectpa.data.Supplier;
 import com.fink.projectpa.exception.WarehouseException;
-import com.fink.projectpa.service.CustomerService;
+import com.fink.projectpa.service.SupplierService;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,45 +22,45 @@ import javax.ws.rs.core.Response;
  *
  * @author danil
  */
-@Path("customer")
-public class CustomerRest {
-    private final CustomerService customerService = CustomerService.getInstance();
+@Path("supplier")
+public class SupplierRest {
+    private final SupplierService supplierService = SupplierService.getInstance();
     
     @GET
-    @Path("/{customer_id}")
+    @Path("/{supplier_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Customer getCustomerById(@PathParam("customer_id") int customer_id) throws WarehouseException {
-        return customerService.findCustomer(customer_id);
+    public Supplier getSupplierById(@PathParam("supplier_id") int supplier_id) throws WarehouseException {
+        return supplierService.findSupplier(supplier_id);
     }
     
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Customer> getAllCustomer() throws WarehouseException {
-        return customerService.getAllCustomers();
+    public List<Supplier> getAllSupplier() throws WarehouseException {
+        return supplierService.getAllSupplier();
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addCustomer(Customer customer) throws WarehouseException{
-            customerService.addNewCustomer(customer);
+    public Response addSupplier(Supplier supplier) throws WarehouseException{
+            supplierService.addNewSupplier(supplier);
             return Response.ok().build();
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCustomer(Customer customer) throws WarehouseException {
-            customerService.updateCustomer(customer);
+    public Response updateSupplier(Supplier supplier) throws WarehouseException {
+            supplierService.updateSupplier(supplier);
             return Response.ok().build();
     }
     
     @DELETE
-    @Path("/{customer_id}")
+    @Path("/{supplier_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteCustomer(@PathParam("customer_id") int customer_id) throws WarehouseException {
-            customerService.deleteCustomer(customer_id);
+    public Response deleteSupplier(@PathParam("supplier_id") int supplier_id) throws WarehouseException {
+            supplierService.deleteSupplier(supplier_id);
             return Response.ok().build();
     }
 }
