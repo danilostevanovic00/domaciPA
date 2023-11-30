@@ -18,10 +18,13 @@ public class Customer implements Serializable {
     private String city;
     private int post_code;
     private String country;
+    
+    public Customer(){
+    }
 
-    public Customer(int customer_id, String customer_name, String contact_person, String address, String city, int post_code, String country) {
+    public Customer(int customer_id, String name, String contact_person, String address, String city, int post_code, String country) {
         this.customer_id = customer_id;
-        this.name = customer_name;
+        this.name = name;
         this.contact_person = contact_person;
         this.address = address;
         this.city = city;
@@ -29,8 +32,8 @@ public class Customer implements Serializable {
         this.country = country;
     }
     
-    public Customer(String customer_name, String contact_person, String address, String city, int post_code, String country) {
-        this.name = customer_name;
+    public Customer(String name, String contact_person, String address, String city, int post_code, String country) {
+        this.name = name;
         this.contact_person = contact_person;
         this.address = address;
         this.city = city;
@@ -50,8 +53,8 @@ public class Customer implements Serializable {
         return name;
     }
 
-    public void setName(String customer_name) {
-        this.name = customer_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContact_person() {
@@ -96,7 +99,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" + "customer_id=" + customer_id + ", customer_name=" + name + ", contact_person=" + contact_person + ", address=" + address + ", city=" + city + ", post_code=" + post_code + ", country=" + country + '}';
+        return "Customer{" + "customer_id=" + customer_id + ", name=" + name + ", contact_person=" + contact_person + ", address=" + address + ", city=" + city + ", post_code=" + post_code + ", country=" + country + '}';
     }
    
 }

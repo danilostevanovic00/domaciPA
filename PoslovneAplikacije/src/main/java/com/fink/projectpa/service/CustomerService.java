@@ -33,8 +33,9 @@ public class CustomerService {
 
             //more than one SQL statement to execute, needs to be a single transaction
             con.setAutoCommit(false);
-
-            CustomerDao.getInstance().insert(customer, con);
+            if (customer!=null){
+                CustomerDao.getInstance().insert(customer, con);
+            }
 
             con.commit();
         } catch (SQLException ex) {

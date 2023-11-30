@@ -15,6 +15,9 @@ public class Employee implements Serializable {
     private String lastname;
     private String firstname;
     private Date birth_date;
+    
+    public Employee(){
+    }
 
     public Employee(int employee_id, String lastname, String firstname, Date birth_date) {
         this.employee_id = employee_id;

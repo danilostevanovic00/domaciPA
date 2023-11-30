@@ -45,7 +45,7 @@ public class EmployeeService {
         }
     }
     
-    public Employee findemployee(int employee_id) throws WarehouseException {
+    public Employee findEmployee(int employee_id) throws WarehouseException {
         Connection con = null;
         try {
             con = ResourcesManager.getConnection();

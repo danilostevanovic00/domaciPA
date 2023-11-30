@@ -51,7 +51,7 @@ public class CustomerDao {
             ps = con.prepareStatement("SELECT * FROM customer");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Customer customer = new Customer(rs.getInt("customer_id"), rs.getString("name"), rs.getString("contact_person"), rs.getString("address"), rs.getString("city"), rs.getInt("post_code"), rs.getString("countryd"));
+                Customer customer = new Customer(rs.getInt("customer_id"), rs.getString("name"), rs.getString("contact_person"), rs.getString("address"), rs.getString("city"), rs.getInt("post_code"), rs.getString("country"));
                 customerList.add(customer);
             }
         } finally {

@@ -86,6 +86,7 @@ public class EmployeeDao {
             ps.setString(1, employee.getLastname());
             ps.setString(2, employee.getFirstname());
             ps.setDate(3, employee.getBirth_date());
+            ps.setInt(4, employee.getEmployee_id());
             ps.executeUpdate();
         } finally {
             ResourcesManager.closeResources(null, ps);

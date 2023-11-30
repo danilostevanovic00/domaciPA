@@ -24,8 +24,14 @@ public class ResourcesManager {
     }
 
     public static Connection getConnection() throws SQLException {
+         try {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/warehouse?user=root&password=");
         return con;
+    } catch (SQLException e) {
+        // Log or print the exception details
+        e.printStackTrace();
+        throw e; // Rethrow the exception to notify the calling code
+    }
     }
 
     public static void closeResources(ResultSet resultSet, PreparedStatement preparedStatement) throws SQLException {
