@@ -62,7 +62,7 @@ public class AdvancedService {
         try{
             products = ProductService.getInstance().getAllProduct();
             for (Product p : products){
-                if(p.getProduct_id()==supplier_id){
+                if(p.getSupplier().getSupplier_id()==supplier_id){
                     productsBySupplier.add(p);
                 }
             }
@@ -107,21 +107,24 @@ public class AdvancedService {
         return products;
     }
     
-    public int getPriceOfAllOrders()throws WarehouseException{
+    public Map<String, Integer> getPriceOfAllOrders()throws WarehouseException{
+        Map<String, Integer> priceMap = new HashMap<>();
         int sum=0;
         List<OrderDetail> orderDetails= null;
         try{
             orderDetails= OrderDetailService.getInstance().getAllOrderDetail();
-             for (OrderDetail od: orderDetails){
-                 sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
-             }
+            for (OrderDetail od: orderDetails){
+                sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
+            }
+            priceMap.put("suma",sum);
         }catch (Exception e) {
             throw new WarehouseException("Failed to get all price of all orders combined ", e);
         }
-        return sum;
+        return priceMap;
     }
     
-    public int getPriceOfAllOrdersByCustomer(int customer_id)throws WarehouseException{
+    public Map<String, Integer> getPriceOfAllOrdersByCustomer(int customer_id)throws WarehouseException{
+        Map<String, Integer> priceMap = new HashMap<>();
         int sum=0;
         List<OrderDetail> orderDetails= null;
         List<OrderDetail> orderDetailsByCustomer= new ArrayList<>();
@@ -145,16 +148,19 @@ public class AdvancedService {
                 }
             }
             
-             for (OrderDetail od: orderDetailsByCustomer){
-                 sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
-             }
+            for (OrderDetail od: orderDetailsByCustomer){
+                sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
+            }
+            
+            priceMap.put("suma",sum);
         }catch (Exception e) {
             throw new WarehouseException("Failed to get all price of all orders by customer with id  "+ customer_id, e);
         }
-        return sum;
+        return priceMap;
     }
     
-    public int getPriceOfAllOrdersByShipper(int shipper_id)throws WarehouseException{
+    public Map<String, Integer> getPriceOfAllOrdersByShipper(int shipper_id)throws WarehouseException{
+        Map<String, Integer> priceMap = new HashMap<>();
         int sum=0;
         List<OrderDetail> orderDetails= null;
         List<OrderDetail> orderDetailsByShipper= new ArrayList<>();
@@ -178,16 +184,19 @@ public class AdvancedService {
                 }
             }
             
-             for (OrderDetail od: orderDetailsByShipper){
-                 sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
-             }
+            for (OrderDetail od: orderDetailsByShipper){
+                sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
+            }
+
+            priceMap.put("suma",sum);
         }catch (Exception e) {
             throw new WarehouseException("Failed to get all price of all orders delivered by shipper with id "+ shipper_id, e);
         }
-        return sum;
+        return priceMap;
     }
     
-    public int getPriceOfAllOrdersBySupplier(int supplier_id)throws WarehouseException{
+    public Map<String, Integer> getPriceOfAllOrdersBySupplier(int supplier_id)throws WarehouseException{
+        Map<String, Integer> priceMap = new HashMap<>();
         int sum=0;
         List<OrderDetail> orderDetails= null;
         List<OrderDetail> orderDetailsBySupplier= new ArrayList<>();
@@ -211,13 +220,15 @@ public class AdvancedService {
                 }
             }
             
-             for (OrderDetail od: orderDetailsBySupplier){
-                 sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
-             }
+            for (OrderDetail od: orderDetailsBySupplier){
+                sum+= od.getProduct().getPrice_per_unit()*od.getQuantity();
+            }
+
+            priceMap.put("suma",sum);
         }catch (Exception e) {
             throw new WarehouseException("Failed to get all price of all orders supplied by supplier with id " +supplier_id, e);
         }
-        return sum;
+        return priceMap;
     }
     
     public Employee getEmployeeThatSoldMostByPrice () throws WarehouseException{
