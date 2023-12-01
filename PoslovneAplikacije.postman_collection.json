@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "1bd46852-3b65-4ed2-9ccb-56474fcc9058",
+		"name": "PoslovneAplikacije",
+		"description": "Collection used for testing student project PoslovneAplikacije",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25707932",
+		"_collection_link": "https://orange-desert-121703.postman.co/workspace/faks~fae9ab69-289b-4ba0-86f6-fee795d8a34f/collection/25707932-1bd46852-3b65-4ed2-9ccb-56474fcc9058?action=share&source=collection_link&creator=25707932"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "getCustomerById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCustomer",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\":2,\r\n    \"name\": \"Simonida\",\r\n    \"contact_person\": \"Danilo\",\r\n    \"address\": \"SumariceBB\",\r\n    \"city\": \"Kragujevac\",\r\n    \"post_code\": 34000,\r\n    \"country\": \"Srbija\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\":2,\r\n    \"name\": \"Simonida\",\r\n    \"contact_person\": \"Danilo\",\r\n    \"address\": \"Sumarice\",\r\n    \"city\": \"Kragujevac\",\r\n    \"post_code\": 34000,\r\n    \"country\": \"Srbija\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/customer/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "getEmployeeById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/employee/1"
+					},
+					"response": []
+				},
+				{
+					"name": "addEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birth_date\": \"2000-06-08Z\",\r\n    \"firstname\": \"Petar\",\r\n    \"lastname\": \"Kraljevic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/employee"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllEmployee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/employee/all"
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/employee"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/employee/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shipper",
+			"item": [
+				{
+					"name": "getShipperById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/shipper/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllShippers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/shipper/all"
+					},
+					"response": []
+				},
+				{
+					"name": "addShipper",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bogosav\",\r\n    \"phone\": \"0641234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/shipper"
+					},
+					"response": []
+				},
+				{
+					"name": "updateShipper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BogosavVeliki\",\r\n    \"phone\": \"0641234567\",\r\n    \"shipper_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/shipper"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/shipper/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supplier",
+			"item": [
+				{
+					"name": "getSupplierById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/supplier/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSupplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/supplier/all"
+					},
+					"response": []
+				},
+				{
+					"name": "addSupplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Kapetana Lukica 51\",\r\n    \"city\": \"Kragujevac\",\r\n    \"contact_person\": \"Boka\",\r\n    \"country\": \"Srbija\",\r\n    \"name\": \"Aca\",\r\n    \"phone\": \"0656574311\",\r\n    \"supplier_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/supplier"
+					},
+					"response": []
+				},
+				{
+					"name": "updateSupplier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Kapetana Lukica 51\",\r\n    \"city\": \"Kragujevac\",\r\n    \"contact_person\": \"Bojana\",\r\n    \"country\": \"Srbija\",\r\n    \"name\": \"Aca\",\r\n    \"phone\": \"0656574311\",\r\n    \"supplier_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/supplier"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSupplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/supplier/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/product/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/product/all"
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Patike\",\r\n    \"price_per_unit\": 40,\r\n    \"product_category\": \"Obuca\",\r\n    \"supplier\": {\r\n        \"address\": \"Kapetana Lukica 51\",\r\n        \"city\": \"Kragujevac\",\r\n        \"contact_person\": \"Mateja\",\r\n        \"country\": \"Srbija\",\r\n        \"name\": \"Luka\",\r\n        \"phone\": \"0656574321\",\r\n        \"supplier_id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/product"
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Patike\",\r\n    \"price_per_unit\": 100,\r\n    \"product_category\": \"Obuca\",\r\n    \"product_id\": 2,\r\n    \"supplier\": {\r\n        \"address\": \"Kapetana Lukica 51\",\r\n        \"city\": \"Kragujevac\",\r\n        \"contact_person\": \"Mateja\",\r\n        \"country\": \"Srbija\",\r\n        \"name\": \"Luka\",\r\n        \"phone\": \"0656574321\",\r\n        \"supplier_id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/product"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/product/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "getOrderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/order/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/order/all"
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"address\": \"EpiskopaSave8/31\",\r\n        \"city\": \"Kragujevac\",\r\n        \"contact_person\": \"Simonida\",\r\n        \"country\": \"Srbija\",\r\n        \"customer_id\": 1,\r\n        \"name\": \"Danilo\",\r\n        \"post_code\": 34000\r\n    },\r\n    \"employee\": {\r\n        \"birth_date\": \"2000-06-08Z\",\r\n        \"employee_id\": 1,\r\n        \"firstname\": \"Marko\",\r\n        \"lastname\": \"Kraljevic\"\r\n    },\r\n    \"order_date\": \"2023-11-12Z\",\r\n    \"order_id\": 1,\r\n    \"shipper\": {\r\n        \"name\": \"Bogdan\",\r\n        \"phone\": \"0641234567\",\r\n        \"shipper_id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/order"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"address\": \"EpiskopaSave8/31\",\r\n        \"city\": \"Kragujevac\",\r\n        \"contact_person\": \"Simonida\",\r\n        \"country\": \"Srbija\",\r\n        \"customer_id\": 1,\r\n        \"name\": \"Danilo\",\r\n        \"post_code\": 34000\r\n    },\r\n    \"employee\": {\r\n        \"birth_date\": \"2000-06-08Z\",\r\n        \"employee_id\": 1,\r\n        \"firstname\": \"Marko\",\r\n        \"lastname\": \"Kraljevic\"\r\n    },\r\n    \"order_date\": \"2023-11-11Z\",\r\n    \"order_id\": 1,\r\n    \"shipper\": {\r\n        \"name\": \"BogdanVeliki\",\r\n        \"phone\": \"0641234567\",\r\n        \"shipper_id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/order"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/order/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderDetail",
+			"item": [
+				{
+					"name": "getOrderDetailById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/orderDetail/2"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrderDetail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/orderDetail/all"
+					},
+					"response": []
+				},
+				{
+					"name": "addOrderDetail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": {\r\n        \"customer\": {\r\n            \"address\": \"EpiskopaSave8/31\",\r\n            \"city\": \"Kragujevac\",\r\n            \"contact_person\": \"Simonida\",\r\n            \"country\": \"Srbija\",\r\n            \"customer_id\": 1,\r\n            \"name\": \"Danilo\",\r\n            \"post_code\": 34000\r\n        },\r\n        \"employee\": {\r\n            \"birth_date\": \"2000-06-07Z\",\r\n            \"employee_id\": 1,\r\n            \"firstname\": \"Marko\",\r\n            \"lastname\": \"Kraljevic\"\r\n        },\r\n        \"order_date\": \"2023-11-10Z\",\r\n        \"order_id\": 1,\r\n        \"shipper\": {\r\n            \"name\": \"BogdanVeliki\",\r\n            \"phone\": \"0641234567\",\r\n            \"shipper_id\": 1\r\n        }\r\n    },\r\n    \"order_detail_id\": 1,\r\n    \"product\": {\r\n        \"name\": \"Cipele\",\r\n        \"price_per_unit\": 50,\r\n        \"product_category\": \"Obuca\",\r\n        \"product_id\": 1,\r\n        \"supplier\": {\r\n            \"address\": \"Kapetana Lukica 51\",\r\n            \"city\": \"Kragujevac\",\r\n            \"contact_person\": \"Mateja\",\r\n            \"country\": \"Srbija\",\r\n            \"name\": \"Luka\",\r\n            \"phone\": \"0656574321\",\r\n            \"supplier_id\": 1\r\n        }\r\n    },\r\n    \"quantity\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/orderDetail"
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderDetail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": {\r\n        \"customer\": {\r\n            \"address\": \"EpiskopaSave8/31\",\r\n            \"city\": \"Kragujevac\",\r\n            \"contact_person\": \"Simonida\",\r\n            \"country\": \"Srbija\",\r\n            \"customer_id\": 1,\r\n            \"name\": \"Danilo\",\r\n            \"post_code\": 34000\r\n        },\r\n        \"employee\": {\r\n            \"birth_date\": \"2000-06-07Z\",\r\n            \"employee_id\": 1,\r\n            \"firstname\": \"Marko\",\r\n            \"lastname\": \"Kraljevic\"\r\n        },\r\n        \"order_date\": \"2023-11-10Z\",\r\n        \"order_id\": 1,\r\n        \"shipper\": {\r\n            \"name\": \"BogdanVeliki\",\r\n            \"phone\": \"0641234567\",\r\n            \"shipper_id\": 1\r\n        }\r\n    },\r\n    \"order_detail_id\": 2,\r\n    \"product\": {\r\n        \"name\": \"Cipele\",\r\n        \"price_per_unit\": 50,\r\n        \"product_category\": \"Obuca\",\r\n        \"product_id\": 1,\r\n        \"supplier\": {\r\n            \"address\": \"Kapetana Lukica 51\",\r\n            \"city\": \"Kragujevac\",\r\n            \"contact_person\": \"Mateja\",\r\n            \"country\": \"Srbija\",\r\n            \"name\": \"Luka\",\r\n            \"phone\": \"0656574321\",\r\n            \"supplier_id\": 1\r\n        }\r\n    },\r\n    \"quantity\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/orderDetail"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderDetail",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/orderDetail/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advanced",
+			"item": [
+				{
+					"name": "getAllProductBySupplierID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/2/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProductByShipperID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/3/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceOfAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/4"
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceOfAllOrdersByCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/5/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceOfAllOrdersByShipper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/6/3"
+					},
+					"response": []
+				},
+				{
+					"name": "getPriceOfAllOrdersBySupplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/7/3"
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeThatSoldMostByPrice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/8"
+					},
+					"response": []
+				},
+				{
+					"name": "getTwoMostSoldProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/9"
+					},
+					"response": []
+				},
+				{
+					"name": "getFourCustomersThatOrdersMost",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/10"
+					},
+					"response": []
+				},
+				{
+					"name": "getSupplierThatDeliveredMostByPrice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/11"
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomersAndOrdersAsObjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomersAndOrdersAsString",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/PoslovneAplikacije/rest/advanced/1/1"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
