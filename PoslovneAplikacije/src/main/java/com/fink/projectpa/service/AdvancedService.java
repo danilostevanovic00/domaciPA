@@ -11,6 +11,7 @@ import com.fink.projectpa.data.Order;
 import com.fink.projectpa.data.OrderDetail;
 import com.fink.projectpa.data.Product;
 import com.fink.projectpa.data.ResourcesManager;
+import com.fink.projectpa.data.Supplier;
 import com.fink.projectpa.dto.CustomerOrdersDto;
 import com.fink.projectpa.exception.WarehouseException;
 import java.sql.Connection;
@@ -35,7 +36,7 @@ public class AdvancedService {
         return instance;
     }
     
-    public List<CustomerOrdersDto> getCustomersAndOrders() throws WarehouseException{
+    public List<CustomerOrdersDto> getCustomersAndOrdersAsObjects() throws WarehouseException{
        List<CustomerOrdersDto> result = new ArrayList<>();
         try {
             List<Customer> customers = CustomerService.getInstance().getAllCustomers();
@@ -49,6 +50,34 @@ public class AdvancedService {
                 }
 
                 result.add(new CustomerOrdersDto(customer.getName(), orderIds));
+            }
+        } catch(Exception e) {
+            throw new WarehouseException("Failed to get all customers and their orders ", e);
+        }
+        return result;
+    }
+    
+    public List<Map<String, String>> getCustomersAndOrdersAsString() throws WarehouseException{
+       List<Map<String, String>> result = new ArrayList<>();
+        try {
+            List<Customer> customers = CustomerService.getInstance().getAllCustomers();
+            Collections.sort(customers, (c1, c2) -> c1.getName().compareToIgnoreCase(c2.getName()));
+
+            for (Customer customer : customers) {
+                List<Integer> orderIds = new ArrayList<>();
+                List<Order> orders = AdvancedService.getInstance().getOrdersByCustomerId(customer.getCustomer_id());
+                for (Order order : orders) {
+                    orderIds.add(order.getOrder_id());
+                }
+                StringBuilder orderIdString=new StringBuilder();
+                for (int odId:orderIds){
+                    orderIdString.append(" ").append(odId);
+                }
+                StringBuilder finalString=new StringBuilder();
+                finalString.append(customer.getName()).append(orderIdString.toString());
+                Map<String, String> prepare=new HashMap<>();
+                prepare.put(customer.getName(),finalString.toString());
+                result.add(prepare);
             }
         } catch(Exception e) {
             throw new WarehouseException("Failed to get all customers and their orders ", e);
@@ -377,5 +406,41 @@ public class AdvancedService {
             throw new WarehouseException("Failed to find four customers with most sold in total cash amount  ", ex);
         }
         return customersMost;
+    }
+    
+    public Supplier getSupplierThatDeliveredMostByPrice ()throws WarehouseException {
+        List<Supplier> suppliers=null;
+        Supplier supplier=null;
+        List<Product> products=null;
+        List<OrderDetail> orderDetails=null;
+        int sum=0;
+        try{
+            suppliers=SupplierService.getInstance().getAllSupplier();
+            products=ProductService.getInstance().getAllProduct();
+            orderDetails = OrderDetailService.getInstance().getAllOrderDetail();
+            for (Supplier s:suppliers){
+                int currSum=0;
+                List<Product> productsBySupplier=new ArrayList<>();
+                for (Product p: products){
+                    if(s.getSupplier_id()==p.getSupplier().getSupplier_id()){
+                        productsBySupplier.add(p);
+                    }
+                }
+                
+                for (Product p: productsBySupplier){
+                    for(OrderDetail od: orderDetails){
+                        if (p.getProduct_id()==od.getProduct().getProduct_id()){
+                            currSum+=od.getQuantity()*p.getPrice_per_unit();
+                        }
+                    }
+                }
+                if(currSum>sum){
+                    supplier=s;
+                }
+            }
+        }catch (Exception ex) {
+            throw new WarehouseException("Failed to find four customers with most sold in total cash amount  ", ex);
+        }
+        return supplier;
     }
 }

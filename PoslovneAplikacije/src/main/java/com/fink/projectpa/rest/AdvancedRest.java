@@ -7,6 +7,8 @@ package com.fink.projectpa.rest;
 import com.fink.projectpa.data.Customer;
 import com.fink.projectpa.data.Employee;
 import com.fink.projectpa.data.Product;
+import com.fink.projectpa.data.Supplier;
+import com.fink.projectpa.dto.CustomerOrdersDto;
 import com.fink.projectpa.exception.WarehouseException;
 import com.fink.projectpa.service.AdvancedService;
 import java.util.List;
@@ -28,6 +30,20 @@ import javax.ws.rs.core.Response;
 @Path("advanced")
 public class AdvancedRest {
     private final AdvancedService advancedService = AdvancedService.getInstance();
+    
+    @GET
+    @Path("/1")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CustomerOrdersDto> getCustomersAndOrdersAsObjects() throws WarehouseException {
+        return advancedService.getCustomersAndOrdersAsObjects();
+    }
+    
+    @GET
+    @Path("/1/1")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Map<String, String>> getCustomersAndOrdersAsString() throws WarehouseException {
+        return advancedService.getCustomersAndOrdersAsString();
+    }
     
     @GET
     @Path("/2/{supplier_id}")
@@ -91,8 +107,10 @@ public class AdvancedRest {
         return advancedService.getFourCustomersThatOrdersMost();
     }
     
-    
-    
-    
-    
+    @GET
+    @Path("/11")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Supplier getSupplierThatDeliveredMostByPrice() throws WarehouseException {
+        return advancedService.getSupplierThatDeliveredMostByPrice();
+    }
 }
