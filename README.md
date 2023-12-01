@@ -1,4 +1,3 @@
-# domaciPA
+# Domaci zadatak iz predmeta Odabrana poglavlja iz projektovanja poslovnih aplikacija
 
-ostala jos 2 rest servisa
-svi implemntirani su testirani
+DONE
